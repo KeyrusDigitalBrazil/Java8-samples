@@ -1,24 +1,23 @@
-package br.com.keyrus.samples.java7;
+package br.com.keyrus.samples.java8.defaultmethod;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import br.com.keyrus.samples.KeyrusOffice;
 
 /**
- * Examples with Java 7
+ * Examples with Java 8
  *
  */
-public class RunWithJava7 {
+public class RunWithJava8 {
 
     public static void main(String[] args) {
 
-        caption("Java 7 !");
+        caption("Java 8 !");
         caption("Init array:");
 
-        List<KeyrusOffice> keyrusOffices = new ArrayList<KeyrusOffice>();
+        List<KeyrusOffice> keyrusOffices = new ArrayList<>();
         keyrusOffices.add(new KeyrusOffice("Keyrus Headquarters", "Paris", "France", "http://www.keyrus.com"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Belgium", "Brussels", "Belgium", "http://www.keyrus.be"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Luxembourg", "Luxembourg", "Luxembourg", "http://www.keyrus.com"));
@@ -42,7 +41,9 @@ public class RunWithJava7 {
             System.out.println(office);
         }
 
-        Collections.sort(keyrusOffices, new OfficeCompare());
+        // Collections.sort(keyrusOffices, new OfficeCompare());
+
+        keyrusOffices.sort(new OfficeCompare());
 
         System.out.println(" -- Ordered -- ");
 
