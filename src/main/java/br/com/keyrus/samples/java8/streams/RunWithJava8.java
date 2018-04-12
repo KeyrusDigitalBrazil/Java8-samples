@@ -1,24 +1,25 @@
-package br.com.keyrus.samples.java7;
+package br.com.keyrus.samples.java8.streams;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import br.com.keyrus.samples.KeyrusOffice;
 
 /**
- * Examples with Java 7
+ * Examples with Java 8
  *
  */
-public class RunWithJava7 {
+public class RunWithJava8 {
 
     public static void main(String[] args) {
 
-        caption("Java 7 !");
+        caption("Java 8 !");
         caption("Init array:");
 
-        List<KeyrusOffice> keyrusOffices = new ArrayList<KeyrusOffice>();
+        List<KeyrusOffice> keyrusOffices = new ArrayList<>();
         keyrusOffices.add(new KeyrusOffice("Keyrus Headquarters", "Paris", "France", "http://www.keyrus.com"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Belgium", "Brussels", "Belgium", "http://www.keyrus.be"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Luxembourg", "Luxembourg", "Luxembourg", "http://www.keyrus.com"));
@@ -31,35 +32,26 @@ public class RunWithJava7 {
         keyrusOffices.add(new KeyrusOffice("Keyrus São Paulo", "São Paulo", "Brazil", "http://www.keyrus.com.br"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Colombia", "Medellín", "Colombia", "http://www.keyrus.lat"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Tunis", "Tunisia", "Tunis", "http://www.keyrus.tn"));
-        keyrusOffices.add(new KeyrusOffice("Keyrus Israel", "Tel Aviv", "Israel", "http://www.keyrus.com"));
-        keyrusOffices.add(
-                new KeyrusOffice("Keyrus Middle East Dubai", "Dubai", "United Arab Emirates", "http://www.keyrus.com"));
-        keyrusOffices.add(new KeyrusOffice("Keyrus China", "Shanghai", "China", "http://www.keyrus.sh.cn"));
 
         System.out.println("List size:" + keyrusOffices.size());
 
-        for (KeyrusOffice office : keyrusOffices) {
-            System.out.println(office);
-        }
+        // stream lista ordenada
+        keyrusOffices.stream().sorted((u1, u2) -> u1.getCity().compareTo(u2.getCity())).forEach(System.out::println);
 
-        Collections.sort(keyrusOffices, new OfficeCompare());
+        // lista filtrada
+        caption("Brazilian offices:");
 
-        System.out.println(" -- Ordered -- ");
+        List<KeyrusOffice> officesBR = keyrusOffices.stream().filter(u -> u.getCountry().equals("Brazil"))
+                .collect(Collectors.toList());
 
-        for (KeyrusOffice office : keyrusOffices) {
-            System.out.println(office);
-        }
+        officesBR.forEach(System.out::println);
 
-        System.out.println(" -- Ordered by city -- ");
-        Comparator<KeyrusOffice> comparatorCity = new Comparator<KeyrusOffice>() {
-            public int compare(KeyrusOffice u1, KeyrusOffice u2) {
-                return u1.getCity().compareTo(u2.getCity());
-            }
-        };
-        Collections.sort(keyrusOffices, comparatorCity);
-        for (KeyrusOffice office : keyrusOffices) {
-            System.out.println(office);
-        }
+        // Map example
+
+        Map<String, String> mapNameCountry = keyrusOffices.stream()
+                .collect(Collectors.toMap(KeyrusOffice::getName, KeyrusOffice::getCountry));
+
+        mapNameCountry.forEach((x, y) -> System.out.println("Name: " + x + ", Country: " + y));
 
     }
 

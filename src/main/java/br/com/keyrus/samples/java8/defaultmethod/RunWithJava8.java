@@ -30,10 +30,6 @@ public class RunWithJava8 {
         keyrusOffices.add(new KeyrusOffice("Keyrus São Paulo", "São Paulo", "Brazil", "http://www.keyrus.com.br"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Colombia", "Medellín", "Colombia", "http://www.keyrus.lat"));
         keyrusOffices.add(new KeyrusOffice("Keyrus Tunis", "Tunisia", "Tunis", "http://www.keyrus.tn"));
-        keyrusOffices.add(new KeyrusOffice("Keyrus Israel", "Tel Aviv", "Israel", "http://www.keyrus.com"));
-        keyrusOffices.add(
-                new KeyrusOffice("Keyrus Middle East Dubai", "Dubai", "United Arab Emirates", "http://www.keyrus.com"));
-        keyrusOffices.add(new KeyrusOffice("Keyrus China", "Shanghai", "China", "http://www.keyrus.sh.cn"));
 
         System.out.println("List size:" + keyrusOffices.size());
 
